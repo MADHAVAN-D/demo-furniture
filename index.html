@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UBERLYFE | Smart Furniture. Better Living.</title>
+  <meta name="description" content="Uberlyfe creates premium sofa beds and multipurpose furniture for modern homes in Bengaluru.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    :root {
+      --ivory: #f5f2eb;
+      --beige: #eae3d8;
+      --charcoal: #1d1a17;
+      --muted: #5f564d;
+      --wood: #8b6a49;
+      --wood-deep: #6f5133;
+      --line: rgba(29, 26, 23, 0.14);
+      --surface: #fffdfa;
+      --shadow-soft: 0 16px 40px rgba(35, 25, 15, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      color: var(--charcoal);
+      background: var(--ivory);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, 92vw);
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 5.5rem 0;
+    }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--wood-deep);
+      font-weight: 700;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border: 1px solid transparent;
+      padding: 0.85rem 1.35rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 260ms ease, background-color 260ms ease, color 260ms ease, border-color 260ms ease;
+      cursor: pointer;
+      min-height: 46px;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid #2b241f;
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      background: var(--charcoal);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #090807;
+    }
+
+    .btn-secondary {
+      border-color: var(--line);
+      background: rgba(255, 253, 250, 0.75);
+      color: var(--charcoal);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: var(--charcoal);
+      background: #fff;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: background-color 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .site-header.scrolled {
+      background: rgba(245, 242, 235, 0.96);
+      backdrop-filter: blur(7px);
+      border-color: var(--line);
+      box-shadow: 0 8px 30px rgba(25, 19, 12, 0.06);
+    }
+
+    .nav-wrap {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 1.4rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 0.2rem 0;
+      transition: color 240ms ease;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.28rem;
+      width: 100%;
+      height: 1px;
+      background: var(--charcoal);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 250ms ease;
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      color: var(--charcoal);
+    }
+
+    .nav-link.active::after,
+    .nav-link:hover::after {
+      transform: scaleX(1);
+    }
+
+    .header-right {
+      display: none;
+      align-items: center;
+    }
+
+    .menu-btn {
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 250, 0.86);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .menu-btn span,
+    .menu-btn::before,
+    .menu-btn::after {
+      content: "";
+      width: 18px;
+      height: 1.7px;
+      background: var(--charcoal);
+      display: block;
+      transition: transform 260ms ease, opacity 260ms ease;
+      grid-area: 1/1;
+    }
+
+    .menu-btn::before {
+      transform: translateY(-6px);
+    }
+
+    .menu-btn::after {
+      transform: translateY(6px);
+    }
+
+    .menu-btn.open span {
+      opacity: 0;
+    }
+
+    .menu-btn.open::before {
+      transform: rotate(45deg);
+    }
+
+    .menu-btn.open::after {
+      transform: rotate(-45deg);
+    }
+
+    .mobile-nav {
+      position: fixed;
+      inset: 78px 0 auto 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 320ms ease;
+      z-index: 999;
+    }
+
+    .mobile-nav.open {
+      max-height: 420px;
+      box-shadow: 0 14px 28px rgba(25, 20, 10, 0.08);
+    }
+
+    .mobile-nav a,
+    .mobile-nav button {
+      width: 100%;
+      border: 0;
+      border-top: 1px solid var(--line);
+      display: flex;
+      padding: 1rem 4vw;
+      background: transparent;
+      font: inherit;
+      text-align: left;
+      color: var(--charcoal);
+    }
+
+    #home {
+      min-height: 100svh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding-top: 6rem;
+      background: radial-gradient(circle at 94% 4%, #ece5d8 0%, var(--ivory) 40%, var(--ivory) 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 2.2rem;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      margin: 0.75rem 0 1rem;
+      font-size: clamp(2rem, 6vw, 4.4rem);
+      line-height: 1.05;
+      max-width: 14ch;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-copy p {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      max-width: 60ch;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .hero-actions {
+      margin-top: 1.65rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .hero-trust {
+      margin-top: 1.5rem;
+      font-size: 0.94rem;
+      color: #3d342e;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
+    }
+
+    .hero-media {
+      position: relative;
+      min-height: 410px;
+      border: 1px solid rgba(40, 30, 18, 0.08);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      background: #ded4c7;
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.03);
+      transition: transform 0.9s ease;
+    }
+
+    .hero-info {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      background: rgba(255, 252, 247, 0.92);
+      border: 1px solid rgba(72, 49, 28, 0.12);
+      padding: 0.8rem 0.95rem;
+      font-size: 0.83rem;
+      color: #3f3328;
+      max-width: 220px;
+      box-shadow: 0 12px 26px rgba(28, 18, 12, 0.09);
+      backdrop-filter: blur(6px);
+    }
+
+    .hero-info strong {
+      display: block;
+      color: var(--charcoal);
+      font-size: 0.93rem;
+    }
+
+    .trust-bar {
+      background: #eee7db;
+      border-top: 1px solid rgba(45, 31, 20, 0.09);
+      border-bottom: 1px solid rgba(45, 31, 20, 0.09);
+      overflow-x: auto;
+    }
+
+    .trust-track {
+      min-width: max-content;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 1px;
+      background: rgba(45, 31, 20, 0.12);
+    }
+
+    .trust-item {
+      background: #f8f4ed;
+      padding: 1.2rem;
+      text-align: center;
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: 1.2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .trust-item span {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .split {
+      display: grid;
+      gap: 1.4rem;
+      align-items: center;
+    }
+
+    .image-panel {
+      min-height: 360px;
+      overflow: hidden;
+      background: #d5c9b9;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(35, 23, 12, 0.09);
+    }
+
+    .image-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h2 {
+      margin: 0.6rem 0 0.7rem;
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      line-height: 1.13;
+      letter-spacing: -0.02em;
+    }
+
+    .lede {
+      color: var(--muted);
+      max-width: 62ch;
+      margin: 0;
+      font-size: 1.02rem;
+    }
+
+    .feature-list {
+      margin: 1.2rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.65rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 560px;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding-left: 1.4rem;
+      font-weight: 500;
+    }
+
+    .feature-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--wood-deep);
+      font-weight: 700;
+    }
+
+    .transform-track {
+      margin-top: 1.6rem;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.4rem;
+      font-size: 0.88rem;
+    }
+
+    .transform-pill {
+      padding: 0.34rem 0.68rem;
+      border: 1px solid var(--line);
+      transition: all 320ms ease;
+    }
+
+    .transform-pill.active {
+      background: var(--charcoal);
+      color: #fff;
+      border-color: var(--charcoal);
+    }
+
+    .collection-grid {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .product-card {
+      background: var(--surface);
+      border: 1px solid rgba(33, 21, 11, 0.1);
+      box-shadow: 0 10px 24px rgba(18, 13, 8, 0.06);
+      overflow: hidden;
+      transition: transform 280ms ease, box-shadow 280ms ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 34px rgba(18, 13, 8, 0.12);
+    }
+
+    .product-thumb {
+      height: 230px;
+      overflow: hidden;
+      background: #d5c8b7;
+    }
+
+    .product-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 460ms ease;
+    }
+
+    .product-card:hover .product-thumb img {
+      transform: scale(1.05);
+    }
+
+    .product-body {
+      padding: 1.1rem;
+    }
+
+    .product-body h3 {
+      margin: 0;
+      font-size: 1.15rem;
+    }
+
+    .product-body p {
+      margin: 0.6rem 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      background: #f8f3ea;
+      font-size: 0.75rem;
+      padding: 0.24rem 0.5rem;
+      color: #4e453c;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .delivery {
+      background: #f0e7d8;
+      border-top: 1px solid rgba(54, 39, 24, 0.12);
+      border-bottom: 1px solid rgba(54, 39, 24, 0.12);
+    }
+
+    .delivery-grid {
+      display: grid;
+      gap: 1.4rem;
+      align-items: center;
+    }
+
+    .delivery-points {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .delivery-point {
+      border-left: 2px solid var(--wood-deep);
+      padding-left: 0.9rem;
+    }
+
+    .delivery-point strong {
+      display: block;
+      font-size: 0.87rem;
+      letter-spacing: 0.11em;
+    }
+
+    .icon-grid {
+      margin-top: 2rem;
+      display: grid;
+      gap: 0.8rem;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .feature-card {
+      border: 1px solid rgba(32, 25, 15, 0.12);
+      background: #fbf8f2;
+      padding: 1.05rem;
+      min-height: 170px;
+    }
+
+    .line-icon {
+      width: 31px;
+      height: 31px;
+      margin-bottom: 0.7rem;
+      color: var(--wood-deep);
+    }
+
+    .feature-card h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .feature-card p {
+      margin: 0.45rem 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .editorial {
+      display: grid;
+      gap: 1rem;
+      align-items: end;
+    }
+
+    .editorial-left {
+      min-height: 320px;
+      overflow: hidden;
+      border: 1px solid rgba(31, 23, 13, 0.11);
+      box-shadow: var(--shadow-soft);
+      background: #d6cab8;
+    }
+
+    .editorial-left img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .room-list {
+      margin: 1rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .room-list li {
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.25rem;
+      color: #4d4034;
+    }
+
+    .reviews-wrap {
+      margin-top: 1.8rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .reviews-track {
+      display: flex;
+      transition: transform 460ms ease;
+    }
+
+    .review-card {
+      min-width: 100%;
+      background: #fcf9f3;
+      border: 1px solid rgba(30, 22, 12, 0.1);
+      padding: 1.2rem;
+      box-shadow: 0 8px 24px rgba(30, 21, 12, 0.06);
+    }
+
+    .review-stars {
+      color: #8b6a49;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.6rem;
+    }
+
+    .review-card p {
+      margin: 0;
+      color: #40352c;
+      font-size: 0.96rem;
+    }
+
+    .review-name {
+      margin-top: 0.95rem;
+      font-weight: 700;
+    }
+
+    .review-controls {
+      display: flex;
+      gap: 0.45rem;
+      justify-content: flex-end;
+      margin-top: 0.8rem;
+    }
+
+    .review-controls button {
+      border: 1px solid var(--line);
+      background: transparent;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
+
+    .gallery-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+
+    .filter-btn {
+      border: 1px solid var(--line);
+      background: transparent;
+      padding: 0.5rem 0.8rem;
+      font-size: 0.84rem;
+      cursor: pointer;
+      transition: all 220ms ease;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--charcoal);
+      color: #fff;
+      border-color: var(--charcoal);
+    }
+
+    .gallery-masonry {
+      columns: 1;
+      column-gap: 0.8rem;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 0.8rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(40, 30, 20, 0.11);
+      background: #dccfbe;
+      cursor: zoom-in;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      transition: transform 380ms ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.06);
+    }
+
+    .gallery-item span {
+      position: absolute;
+      left: 0.7rem;
+      bottom: 0.65rem;
+      background: rgba(18, 13, 9, 0.74);
+      color: #fff;
+      font-size: 0.73rem;
+      padding: 0.2rem 0.5rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .location-grid {
+      display: grid;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .address-box {
+      border: 1px solid rgba(40, 28, 15, 0.13);
+      background: #fcf8f1;
+      padding: 1.2rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .address-box address {
+      font-style: normal;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      line-height: 1.7;
+    }
+
+    .map-box {
+      border: 1px solid rgba(40, 28, 15, 0.13);
+      min-height: 300px;
+      overflow: hidden;
+      background: #e3d7c7;
+    }
+
+    .map-box iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 300px;
+      border: 0;
+    }
+
+    .final-cta {
+      position: relative;
+      background: #171411;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .final-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(18, 14, 10, 0.72), rgba(18, 14, 10, 0.72)), url("https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.48;
+    }
+
+    .final-cta .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .final-cta h2 {
+      max-width: 13ch;
+    }
+
+    footer {
+      background: #110f0d;
+      color: #f2ede5;
+      padding: 2.8rem 0 2.4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-grid {
+      display: grid;
+      gap: 1.3rem;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1rem;
+      color: #d4c8bb;
+      font-size: 0.9rem;
+    }
+
+    .footer-copy {
+      margin-top: 1.2rem;
+      color: #af9f90;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 1rem;
+    }
+
+    .mobile-cta {
+      position: fixed;
+      left: 0.7rem;
+      right: 0.7rem;
+      bottom: 0.7rem;
+      z-index: 950;
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(17, 13, 9, 0.92);
+      padding: 0.5rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .mobile-cta a {
+      flex: 1;
+      font-size: 0.82rem;
+      text-align: center;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      padding: 0.55rem 0.4rem;
+    }
+
+    .back-top {
+      position: fixed;
+      right: 1rem;
+      bottom: 4.9rem;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      background: rgba(255, 252, 247, 0.95);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 240ms ease;
+      z-index: 960;
+    }
+
+    .back-top.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: none;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 10, 8, 0.9);
+      z-index: 1200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-height: 90vh;
+      max-width: min(1080px, 95vw);
+      object-fit: contain;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .lightbox button {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      background: transparent;
+      cursor: pointer;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    @media (min-width: 760px) {
+      .hero-grid,
+      .split,
+      .delivery-grid,
+      .location-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .collection-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .icon-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .editorial {
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+
+      .gallery-masonry {
+        columns: 2;
+      }
+
+      .review-card {
+        min-width: calc(50% - 0.5rem);
+        margin-right: 0.8rem;
+      }
+
+      .mobile-cta {
+        display: none;
+      }
+
+      .back-top {
+        bottom: 1rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .nav-links,
+      .header-right {
+        display: flex;
+      }
+
+      .menu-btn,
+      .mobile-nav {
+        display: none;
+      }
+
+      .hero-media {
+        min-height: 560px;
+      }
+
+      .collection-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .gallery-masonry {
+        columns: 3;
+      }
+
+      .review-card {
+        min-width: calc(33.333% - 0.6rem);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.4fr 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home">UBERLYFE</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#sofa-beds">Sofa Beds</a>
+        <a class="nav-link" href="#why-uberlyfe">Why Uberlyfe</a>
+        <a class="nav-link" href="#reviews">Reviews</a>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+      <div class="header-right">
+        <a href="#sofa-beds" class="btn btn-primary">Explore Collection</a>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+      <a href="#home">Home</a>
+      <a href="#sofa-beds">Sofa Beds</a>
+      <a href="#why-uberlyfe">Why Uberlyfe</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#sofa-beds">Explore Collection</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Smart furniture for modern homes</p>
+          <h1>Furniture that works twice as hard.</h1>
+          <p>Thoughtfully designed sofa beds and multipurpose furniture made for modern spaces, unexpected guests and everyday living.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#sofa-beds">Explore Sofa Beds</a>
+            <a class="btn btn-secondary" href="#contact">Visit Our Store</a>
+          </div>
+          <div class="hero-trust" aria-label="Google rating">
+            <strong>★★★★★</strong>
+            <span>4.8/5 from 1,632+ Google reviews</span>
+          </div>
+        </div>
+        <div class="hero-media reveal" data-parallax>
+          <img src="https://images.unsplash.com/photo-1615529162924-f86053884672?auto=format&fit=crop&w=1400&q=80" alt="Uberlyfe premium sofa bed in a modern home">
+          <div class="hero-info">
+            <strong>Next-day delivery available</strong>
+            Bengaluru
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-bar" aria-label="Trust highlights">
+      <div class="container trust-track">
+        <div class="trust-item"><strong>4.8★</strong><span>Google Rating</span></div>
+        <div class="trust-item"><strong>1,632+</strong><span>Happy Reviews</span></div>
+        <div class="trust-item"><strong>Next-Day</strong><span>Delivery in Bengaluru</span></div>
+        <div class="trust-item"><strong>Made for</strong><span>Modern Spaces</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container split">
+        <div class="image-panel reveal">
+          <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1300&q=80" alt="Convertible sofa bed setup in living space">
+        </div>
+        <div class="reveal">
+          <p class="eyebrow">Adaptive sofa-bed design</p>
+          <h2>One piece. Two purposes.</h2>
+          <p class="lede">Why choose between a sofa and a bed when you can have both? Uberlyfe creates practical furniture that adapts to the way you live.</p>
+          <ul class="feature-list">
+            <li>Sofa by day</li>
+            <li>Bed by night</li>
+            <li>Space-saving design</li>
+            <li>Comfortable cushioning</li>
+            <li>Modern designs</li>
+            <li>Built for everyday use</li>
+          </ul>
+          <div class="transform-track" aria-label="Sofa to bed transformation">
+            <span class="transform-pill active" id="sofaState">SOFA</span>
+            <span>→</span>
+            <span class="transform-pill" id="bedState">BED</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sofa-beds">
+      <div class="container">
+        <p class="eyebrow reveal">Designed for real life.</p>
+        <h2 class="reveal">Furniture that makes every square foot count.</h2>
+        <div class="collection-grid">
+          <article class="product-card reveal">
+            <div class="product-thumb"><img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&w=900&q=80" alt="Single seater sofa cum bed"></div>
+            <div class="product-body">
+              <h3>Single Seater Sofa Cum Bed</h3>
+              <p>Compact and perfect for balconies and small rooms.</p>
+              <div class="tags"><span class="tag">Compact</span><span class="tag">Small Rooms</span></div>
+              <p><strong>Enquire for Price</strong></p>
+              <div class="product-actions">
+                <a class="btn btn-secondary" href="#contact">View Details</a>
+                <a class="btn btn-primary" href="tel:09971601023">Enquire Now</a>
+              </div>
+            </div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-thumb"><img src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=900&q=80" alt="4x6 sofa cum bed"></div>
+            <div class="product-body">
+              <h3>4 × 6 Sofa Cum Bed</h3>
+              <p>Comfortable sleeping space that is ideal for families.</p>
+              <div class="tags"><span class="tag">Family Friendly</span><span class="tag">Comfort Sleep</span></div>
+              <p><strong>Enquire for Price</strong></p>
+              <div class="product-actions">
+                <a class="btn btn-secondary" href="#contact">View Details</a>
+                <a class="btn btn-primary" href="tel:09971601023">Enquire Now</a>
+              </div>
+            </div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-thumb"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" alt="Multipurpose sofa bed range"></div>
+            <div class="product-body">
+              <h3>Multipurpose Sofa Beds</h3>
+              <p>Flexible designs built for modern homes and routines.</p>
+              <div class="tags"><span class="tag">Flexible</span><span class="tag">Modern Homes</span></div>
+              <p><strong>Enquire for Price</strong></p>
+              <div class="product-actions">
+                <a class="btn btn-secondary" href="#contact">View Details</a>
+                <a class="btn btn-primary" href="tel:09971601023">Enquire Now</a>
+              </div>
+            </div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-thumb"><img src="https://images.unsplash.com/photo-1617098474202-0d0d7f60f5d8?auto=format&fit=crop&w=900&q=80" alt="Compact living collection by Uberlyfe"></div>
+            <div class="product-body">
+              <h3>Compact Living Collection</h3>
+              <p>Space-conscious furniture with a clean modern aesthetic.</p>
+              <div class="tags"><span class="tag">Space Smart</span><span class="tag">Minimal</span></div>
+              <p><strong>Enquire for Price</strong></p>
+              <div class="product-actions">
+                <a class="btn btn-secondary" href="#contact">View Details</a>
+                <a class="btn btn-primary" href="tel:09971601023">Enquire Now</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section delivery">
+      <div class="container delivery-grid reveal">
+        <div>
+          <p class="eyebrow">Fast options for urgent needs</p>
+          <h2>Need a sofa bed by the weekend?</h2>
+          <p class="lede">Unexpected guests? Moving into a new home? Need an extra sleeping space quickly? Uberlyfe offers next-day delivery on many top-selling sofa bed models in Bengaluru, with same-day delivery available in some cases.</p>
+          <p style="margin-top:1.1rem;"><a class="btn btn-primary" href="tel:09971601023">Check Availability</a></p>
+        </div>
+        <div class="delivery-points">
+          <div class="delivery-point"><strong>NEXT-DAY DELIVERY</strong><span>Bengaluru</span></div>
+          <div class="delivery-point"><strong>SAME-DAY OPTIONS</strong><span>Selected models</span></div>
+          <div class="delivery-point"><strong>FAST DELIVERY</strong><span>Porter charges may apply</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why-uberlyfe">
+      <div class="container">
+        <p class="eyebrow reveal">Why Uberlyfe</p>
+        <h2 class="reveal">Made for the way you live.</h2>
+        <div class="icon-grid">
+          <article class="feature-card reveal"><svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 11h18M7 7h10M7 15h10M5 4h14v16H5z"/></svg><h3>Space Smart</h3><p>Furniture designed to make the most of compact spaces.</p></article>
+          <article class="feature-card reveal"><svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 8h16v8H4z"/><path d="M7 8V5h10v3"/></svg><h3>Dual Purpose</h3><p>Switch effortlessly between seating and sleeping.</p></article>
+          <article class="feature-card reveal"><svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12c3-2 5-2 8 0s5 2 10 0"/><path d="M4 14v5h16v-5"/></svg><h3>Comfortable</h3><p>Designed with comfort in mind for both sitting and sleeping.</p></article>
+          <article class="feature-card reveal"><svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19h16M7 19V5h10v14"/><path d="M9 9h6"/></svg><h3>Practical</h3><p>Built around real everyday needs.</p></article>
+          <article class="feature-card reveal"><svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12h9"/><path d="M12 6l6 6-6 6"/><path d="M4 5h4v4"/></svg><h3>Fast Delivery</h3><p>Quick delivery options available for selected products in Bengaluru.</p></article>
+          <article class="feature-card reveal"><svg class="line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 19v-7l7-4 7 4v7"/><path d="M9 19v-4h6v4"/></svg><h3>Family Friendly</h3><p>Thoughtful designs suitable for everyday family use.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container editorial">
+        <div class="editorial-left reveal">
+          <img src="https://images.unsplash.com/photo-1617104551722-3b2d513664f7?auto=format&fit=crop&w=1400&q=80" alt="Compact living room with modern sofa bed">
+        </div>
+        <div class="reveal">
+          <p class="eyebrow">Compact living, elevated</p>
+          <h2>Big comfort. Small footprint.</h2>
+          <p class="lede">From compact balconies to modern apartments, Uberlyfe furniture is designed to fit beautifully into spaces where every inch matters.</p>
+          <ul class="room-list">
+            <li>Balcony</li>
+            <li>Apartment</li>
+            <li>Bedroom</li>
+            <li>Living room</li>
+            <li>Studio apartment</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reviews">
+      <div class="container">
+        <p class="eyebrow reveal">Customer Reviews</p>
+        <h2 class="reveal">Loved by 1,600+ customers.</h2>
+        <p class="reveal" style="margin:0; font-size:1.1rem;"><strong>★★★★★</strong> <strong>4.8 / 5</strong></p>
+        <div class="reviews-wrap reveal">
+          <div class="reviews-track" id="reviewsTrack">
+            <article class="review-card"><div class="review-stars">★★★★★</div><p>Compact, comfortable and perfect for small spaces. The folding mechanism feels smooth and practical for daily use.</p><p class="review-name">Siddhartha Gupta</p></article>
+            <article class="review-card"><div class="review-stars">★★★★★</div><p>Solid product, good experience and exactly what I expected. The team guided me well for a compact room setup.</p><p class="review-name">Prakhar Bindal</p></article>
+            <article class="review-card"><div class="review-stars">★★★★★</div><p>Perfect for a bed that folds into a sofa during the day. Value for money and practical for multipurpose spaces.</p><p class="review-name">Saumya Tripathy</p></article>
+            <article class="review-card"><div class="review-stars">★★★★★</div><p>Good comfort for both sitting and sleeping. A smart choice when you need extra sleeping space without crowding the room.</p><p class="review-name">Siddhartha Gupta</p></article>
+          </div>
+          <div class="review-controls">
+            <button id="reviewPrev" aria-label="Previous reviews">←</button>
+            <button id="reviewNext" aria-label="Next reviews">→</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <p class="eyebrow reveal">Photo Gallery</p>
+        <h2 class="reveal">Inside Uberlyfe spaces.</h2>
+        <div class="gallery-filter reveal" role="tablist" aria-label="Gallery categories">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="latest">Latest</button>
+          <button class="filter-btn" data-filter="exterior">Exterior</button>
+          <button class="filter-btn" data-filter="interior">Interior</button>
+          <button class="filter-btn" data-filter="sofa">Sofa</button>
+        </div>
+        <div class="gallery-masonry reveal" id="galleryGrid">
+          <figure class="gallery-item" data-category="latest interior sofa"><img src="https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&w=900&q=80" alt="Modern sofa bed in a warm interior"><span>Interior</span></figure>
+          <figure class="gallery-item" data-category="latest sofa"><img src="https://images.unsplash.com/photo-1630699375891-d8d64f5f6b5b?auto=format&fit=crop&w=900&q=80" alt="Premium compact sofa in contemporary room"><span>Sofa</span></figure>
+          <figure class="gallery-item" data-category="exterior latest"><img src="https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&w=900&q=80" alt="Furniture storefront exterior"><span>Exterior</span></figure>
+          <figure class="gallery-item" data-category="interior sofa"><img src="https://images.unsplash.com/photo-1556912173-46c336c7fd55?auto=format&fit=crop&w=900&q=80" alt="Living room with foldable sofa bed"><span>Sofa</span></figure>
+          <figure class="gallery-item" data-category="interior"><img src="https://images.unsplash.com/photo-1615875605825-5eb9bb5d52cb?auto=format&fit=crop&w=900&q=80" alt="Compact bedroom setup"><span>Interior</span></figure>
+          <figure class="gallery-item" data-category="sofa latest"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=900&q=80" alt="Multipurpose sofa bed setup"><span>Latest</span></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container location-grid">
+        <div class="address-box reveal">
+          <p class="eyebrow">Store Location</p>
+          <h2>Visit Uberlyfe</h2>
+          <address>
+            33/A, 22nd Cross Rd,<br>
+            Opposite The HSR Club,<br>
+            Sector 3, HSR Layout,<br>
+            Bengaluru, Karnataka 560102
+          </address>
+          <p style="margin-top:0.9rem;"><strong>Open today · Closes 9 PM</strong></p>
+          <p style="margin:0.4rem 0 0.9rem;">Phone: <a href="tel:09971601023">099716 01023</a></p>
+          <div class="hero-actions" style="margin-top:0;">
+            <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=33%2FA%2C%2022nd%20Cross%20Rd%2C%20HSR%20Layout%2C%20Bengaluru" target="_blank" rel="noopener">Get Directions</a>
+            <a class="btn btn-secondary" href="tel:09971601023">Call Uberlyfe</a>
+          </div>
+        </div>
+        <div class="map-box reveal" aria-label="Map to Uberlyfe location">
+          <iframe loading="lazy" title="Uberlyfe Bengaluru map" src="https://www.google.com/maps?q=33/A,22nd%20Cross%20Rd,HSR%20Layout,Bengaluru&output=embed"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-cta">
+      <div class="container reveal">
+        <p class="eyebrow" style="color:#d3b696;">UBERLYFE</p>
+        <h2>Your space deserves smarter furniture.</h2>
+        <p class="lede" style="color:#d2c5b6;">Discover sofa beds designed to adapt to your home, your guests and your lifestyle.</p>
+        <div class="hero-actions">
+          <a class="btn btn-secondary" href="#sofa-beds" style="background:#fff;">Explore Collection</a>
+          <a class="btn btn-primary" href="tel:09971601023" style="background:#3f3023;">Call 099716 01023</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="brand">UBERLYFE</div>
+        <p style="margin:0.6rem 0 0; color:#cab9a7;">Smart Furniture. Better Living.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#home">Home</a>
+        <a href="#sofa-beds">Sofa Beds</a>
+        <a href="#why-uberlyfe">Why Uberlyfe</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div style="font-size:0.92rem; color:#c7b7a7;">
+        <p style="margin:0 0 0.3rem;">099716 01023</p>
+        <p style="margin:0 0 0.3rem;">HSR Layout, Bengaluru</p>
+        <p style="margin:0;"><a href="https://uberlyfe.com" target="_blank" rel="noopener">uberlyfe.com</a></p>
+      </div>
+    </div>
+    <div class="container footer-copy">© 2026 Uberlyfe. All rights reserved.</div>
+  </footer>
+
+  <div class="mobile-cta" aria-label="Quick actions">
+    <a href="tel:09971601023">Call Uberlyfe</a>
+    <a href="#sofa-beds">Enquire Collection</a>
+  </div>
+
+  <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button id="lightboxClose" aria-label="Close image">×</button>
+    <img id="lightboxImage" src="" alt="Expanded gallery view">
+  </div>
+
+  <script>
+    const header = document.getElementById("siteHeader");
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileNav = document.getElementById("mobileNav");
+    const backTop = document.getElementById("backTop");
+    const navLinks = [...document.querySelectorAll(".nav-link")];
+    const mobileNavLinks = [...mobileNav.querySelectorAll("a")];
+    const revealEls = [...document.querySelectorAll(".reveal")];
+
+    function setHeaderState() {
+      if (window.scrollY > 32) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+      if (window.scrollY > 420) {
+        backTop.classList.add("show");
+      } else {
+        backTop.classList.remove("show");
+      }
+    }
+
+    window.addEventListener("scroll", setHeaderState);
+    setHeaderState();
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = mobileNav.classList.toggle("open");
+      menuBtn.classList.toggle("open", isOpen);
+      menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    mobileNavLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+        menuBtn.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const sectionIds = ["home", "sofa-beds", "why-uberlyfe", "reviews", "about", "contact"];
+    const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+
+    function markActiveNav() {
+      const marker = window.scrollY + 140;
+      let current = "home";
+      sections.forEach((section) => {
+        if (section.offsetTop <= marker) current = section.id;
+      });
+      navLinks.forEach((link) => {
+        const active = link.getAttribute("href") === `#${current}`;
+        link.classList.toggle("active", active);
+      });
+    }
+
+    window.addEventListener("scroll", markActiveNav);
+    markActiveNav();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    revealEls.forEach((el) => observer.observe(el));
+
+    const sofaState = document.getElementById("sofaState");
+    const bedState = document.getElementById("bedState");
+    let transformStep = false;
+    setInterval(() => {
+      transformStep = !transformStep;
+      sofaState.classList.toggle("active", !transformStep);
+      bedState.classList.toggle("active", transformStep);
+    }, 1600);
+
+    const track = document.getElementById("reviewsTrack");
+    const reviewCards = [...track.children];
+    const prevBtn = document.getElementById("reviewPrev");
+    const nextBtn = document.getElementById("reviewNext");
+    let reviewIndex = 0;
+
+    function reviewsPerView() {
+      if (window.innerWidth >= 1024) return 3;
+      if (window.innerWidth >= 760) return 2;
+      return 1;
+    }
+
+    function moveReviews() {
+      const cardWidth = reviewCards[0].getBoundingClientRect().width + (window.innerWidth >= 760 ? 13 : 0);
+      track.style.transform = `translateX(-${reviewIndex * cardWidth}px)`;
+    }
+
+    function stepReviews(dir) {
+      const maxIndex = Math.max(0, reviewCards.length - reviewsPerView());
+      reviewIndex = Math.min(maxIndex, Math.max(0, reviewIndex + dir));
+      moveReviews();
+    }
+
+    prevBtn.addEventListener("click", () => stepReviews(-1));
+    nextBtn.addEventListener("click", () => stepReviews(1));
+    window.addEventListener("resize", () => {
+      const maxIndex = Math.max(0, reviewCards.length - reviewsPerView());
+      reviewIndex = Math.min(reviewIndex, maxIndex);
+      moveReviews();
+    });
+    moveReviews();
+
+    const filterButtons = [...document.querySelectorAll(".filter-btn")];
+    const galleryItems = [...document.querySelectorAll(".gallery-item")];
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const filter = btn.dataset.filter;
+        galleryItems.forEach((item) => {
+          const show = filter === "all" || item.dataset.category.includes(filter);
+          item.style.display = show ? "block" : "none";
+        });
+      });
+    });
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxClose = document.getElementById("lightboxClose");
+
+    galleryItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        const image = item.querySelector("img");
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+        lightbox.classList.add("open");
+        lightbox.setAttribute("aria-hidden", "false");
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImage.src = "";
+    }
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeLightbox();
+    });
+
+    backTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Fallback placeholders ensure no broken image boxes if an external image fails.
+    const fallbackSvg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='600' fill='%23d8ccbc'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%23615143' font-size='34' font-family='Arial'%3EUberlyfe Image Placeholder%3C/text%3E%3C/svg%3E";
+    document.querySelectorAll("img").forEach((img) => {
+      img.addEventListener("error", () => {
+        if (!img.dataset.fallback) {
+          img.dataset.fallback = "true";
+          img.src = fallbackSvg;
+        }
+      });
+    });
+
+    const parallaxTargets = [...document.querySelectorAll("[data-parallax]")];
+    function runParallax() {
+      const offset = Math.min(30, window.scrollY * 0.08);
+      parallaxTargets.forEach((el) => {
+        const image = el.querySelector("img");
+        if (image) image.style.transform = `scale(1.03) translateY(${offset}px)`;
+      });
+    }
+    window.addEventListener("scroll", runParallax, { passive: true });
+  </script>
+</body>
+</html>
